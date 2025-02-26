@@ -1,7 +1,4 @@
-theme: jekyll-theme-slate
-baseurl: /5g-charts
-title: Gradiant 5G Charts
-description: A curated collection of 5G/6G related Helm Charts
-relative_links:
-  enabled:     true
-  collections: true
+title: "open5gs-go-operator-1"
+description: "Página de GitHub Pages para el repositorio open5gs-go-operator-1"
+theme: jekyll-theme-cayman
+ 
