@@ -1,0 +1,41 @@
+amf:
+  enabled: false
+ausf:
+  enabled: false
+bsf:
+  enabled: false
+nrf:
+  enabled: false
+nssf:
+  enabled: false
+pcf:
+  enabled: false
+udm:
+  enabled: false
+udr:
+  enabled: false
+smf:
+  config:
+    nrf:
+      enabled: false
+mme:
+  config:
+    gummeiList:
+      - plmn_id:
+          mcc: "999"
+          mnc: "70"
+        mme_gid: 2
+        mme_code: 1
+    taiList:
+      - plmn_id:
+          mcc: "999"
+          mnc: "70"
+        tac: [0, 1, 2]
+webui:
+  ingress:
+    enabled: false
+
+populate:
+  enabled: true
+  initCommands:
+  - open5gs-dbctl add_ue_with_apn 999700000053410 2C9623736F9F37BD7BF6F6797F3CA9AF 09C74182747FA179A650BBE2147FCCDC internet
