@@ -5,3 +5,5 @@ baseurl: /open5gs-go-operator-1
 relative_links:
   enabled:     true
   collections: true
+highlighter: rouge
+markdown: kramdown

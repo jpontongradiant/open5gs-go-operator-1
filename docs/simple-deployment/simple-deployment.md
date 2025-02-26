@@ -18,7 +18,7 @@
 
 2. Apply the deployment file:
 
-   ```bash
+   ``` bash
    kubectl apply -f open5gs-deployment.yaml
    ```
 
@@ -49,6 +49,6 @@
 
 2. Apply the user configuration:
 
-   ```bash
+   ``` bash
    kubectl apply -f open5gsuser-1.yaml
    ```
