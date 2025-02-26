@@ -1,8 +1,82 @@
-# _config.yml
-title: "Open5GS Operator Documentation"
-description: "Documentación completa para el Open5GS Operator, incluyendo despliegue, configuración y tutoriales."
+# Configuración del sitio
+title: Open5GS Operator
+description: Documentación y tutoriales para desplegar y administrar Open5GS en Kubernetes
 baseurl: ""
-url: "https://example.github.io"
+url: "https://open5gs.github.io"
+
+# Configuración de tema
+theme: minima
+remote_theme: jekyll/minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-remote-theme
+
+# Estructura de enlaces
+permalink: pretty
+
+# Configuración de navegación
+header_pages:
+  - index.md
+  - tutorials.md
+  - about.md
+
+# Excluir archivos y carpetas
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - LICENSE
+
+# Configuración de colecciones para mejor organización
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path/
+
+# Valores por defecto para archivos Markdown
+defaults:
+  -
+    scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "page"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Configuración de Markdown
 markdown: kramdown
-theme: jekyll-theme-minimal
 highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+# Configuración de sintaxis resaltada
+rouge:
+  css_class: 'highlight'
+  style: github

@@ -1,1 +1,171 @@
-# Valores para despliegue
+apiVersion: open5gs.org/v1alpha1
+kind: Open5GSDeployment
+metadata:
+  name: open5gs-demo
+  namespace: open5gs
+spec:
+  # Configuración global
+  global:
+    image:
+      repository: open5gs/open5gs
+      tag: latest
+      pullPolicy: IfNotPresent
+    resources:
+      requests:
+        memory: "128Mi"
+        cpu: "100m"
+      limits:
+        memory: "256Mi"
+        cpu: "200m"
+    
+  # Configuración de componentes NRF
+  nrf:
+    enabled: true
+    replicas: 1
+    service:
+      type: ClusterIP
+      port: 7777
+    
+  # Componentes de control (control plane)
+  amf:
+    enabled: true
+    replicas: 1
+    service:
+      type: ClusterIP
+      port: 38412
+    resources:
+      requests:
+        memory: "128Mi"
+        cpu: "100m"
+      limits:
+        memory: "256Mi"
+        cpu: "200m"
+    
+  ausf:
+    enabled: true
+    replicas: 1
+  
+  nssf:
+    enabled: true
+    replicas: 1
+  
+  pcf:
+    enabled: true
+    replicas: 1
+  
+  smf:
+    enabled: true
+    replicas: 1
+    resources:
+      requests:
+        memory: "128Mi"
+        cpu: "100m"
+      limits:
+        memory: "256Mi"
+        cpu: "200m"
+    config:
+      pfcp:
+        enabled: true
+      gtpc:
+        enabled: true
+  
+  udm:
+    enabled: true
+    replicas: 1
+  
+  udr:
+    enabled: true
+    replicas: 1
+  
+  # Componentes de usuario (user plane)
+  upf:
+    enabled: true
+    replicas: 1
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "200m"
+      limits:
+        memory: "512Mi"
+        cpu: "500m"
+    config:
+      gtpu:
+        addr: 0.0.0.0
+        port: 2152
+      pfcp:
+        addr: 0.0.0.0
+        port: 8805
+    
+  # Base de datos MongoDB
+  mongodb:
+    enabled: true
+    auth:
+      enabled: true
+      rootPassword: "changeme"
+      username: "open5gs"
+      password: "open5gs"
+      database: "open5gs"
+    persistence:
+      enabled: true
+      size: 1Gi
+    
+  # Configuración de la red
+  networking:
+    mnoDomain: "open5gs.local"
+    mcc: "208"
+    mnc: "93"
+    tac: 7
+    dnn: "internet"
+    ipPool: "10.45.0.0/16"
+    natEnabled: true
+    
+  # Interfaz Web
+  webui:
+    enabled: true
+    service:
+      type: ClusterIP
+      port: 3000
+    ingress:
+      enabled: false
+      # Para habilitar ingress, descomenta las siguientes líneas
+      # host: open5gs.example.com
+      # tls:
+      #   enabled: true
+      #   secretName: open5gs-tls
+    
+  # Configuración de alta disponibilidad
+  highAvailability:
+    enabled: false
+    # Descomenta para configurar HA
+    # podAntiAffinity: true
+    # topologySpreadConstraints:
+    #   enabled: true
+    #   maxSkew: 1
+    
+  # Monitorización
+  monitoring:
+    prometheus:
+      enabled: false
+      # Descomenta para habilitar Prometheus
+      # serviceMonitor:
+      #   enabled: true
+      #   interval: 30s
+    grafana:
+      enabled: false
+      # Descomenta para habilitar tableros Grafana
+      # dashboards:
+      #   enabled: true
+    
+  # Configuración de seguridad
+  security:
+    securityContext:
+      enabled: true
+      runAsUser: 1000
+      runAsGroup: 1000
+    networkPolicies:
+      enabled: false
+    
+  # Configuración de logs
+  logging:
+    level: "info"
+    format: "json"

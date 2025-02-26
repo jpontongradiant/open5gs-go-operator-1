@@ -3,14 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title | escape }} | {{ site.title | escape }}</title>
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+  
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
 </head>
 <body>
   <header>
     <nav class="navbar">
       <div class="navbar-container">
-        <a href="{{ '/' | relative_url }}" class="navbar-brand">Open5GS Operator</a>
+        <a href="{{ '/' | relative_url }}" class="navbar-brand">{{ site.title }}</a>
         <button class="navbar-toggle" id="navbar-toggle">
           <span class="bar"></span>
           <span class="bar"></span>
@@ -31,10 +46,17 @@
   </main>
   <footer>
     <div class="footer-content">
-      <p>Contacto: info@open5gsoperator.com</p>
+      <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Todos los derechos reservados.</p>
+      <p>Contacto: <a href="mailto:info@open5gsoperator.com">info@open5gsoperator.com</a></p>
       <p>GitHub: <a href="https://github.com/tuusuario" target="_blank" rel="noopener">tuusuario</a></p>
     </div>
   </footer>
+  
+  <!-- JavaScript -->
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
 </body>
 </html>
