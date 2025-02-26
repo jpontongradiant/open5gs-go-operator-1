@@ -1,0 +1,8 @@
+# _config.yml
+title: "Open5GS Operator Documentation"
+description: "Documentación completa para el Open5GS Operator, incluyendo despliegue, configuración y tutoriales."
+baseurl: ""
+url: "https://example.github.io"
+markdown: kramdown
+theme: jekyll-theme-minimal
+highlighter: rouge

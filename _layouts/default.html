@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | escape }} | {{ site.title | escape }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="{{ '/' | relative_url }}" class="navbar-brand">Open5GS Operator</a>
+        <button class="navbar-toggle" id="navbar-toggle">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <div class="navbar-menu" id="navbar-menu">
+          <ul class="navbar-links">
+            <li><a href="{{ '/' | relative_url }}">Inicio</a></li>
+            <li><a href="{{ '/tutorials' | relative_url }}">Tutoriales</a></li>
+            <li><a href="{{ '/about' | relative_url }}">Acerca de</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    {{ content }}
+  </main>
+  <footer>
+    <div class="footer-content">
+      <p>Contacto: info@open5gsoperator.com</p>
+      <p>GitHub: <a href="https://github.com/tuusuario" target="_blank" rel="noopener">tuusuario</a></p>
+    </div>
+  </footer>
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

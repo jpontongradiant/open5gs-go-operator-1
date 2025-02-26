@@ -1,0 +1,233 @@
+/* assets/css/styles.css */
+
+/* Reset y estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #121212;
+    color: #e0e0e0;
+    padding: 20px;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #1f1f1f;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    color: #e0e0e0;
+    text-decoration: none;
+  }
+  
+  .navbar-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none;
+  }
+  
+  .navbar-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: #e0e0e0;
+  }
+  
+  .navbar-menu {
+    display: flex;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+  }
+  
+  .navbar-links li {
+    margin-left: 20px;
+  }
+  
+  .navbar-links a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .navbar-links a:hover {
+    color: #ff9800;
+  }
+  
+  /* Sección Hero */
+  .hero {
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+  }
+  
+  /* Tarjetas de Tutoriales */
+  .tutorial-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+  }
+  
+  .card {
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  
+  .card img {
+    max-width: 100%;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+  
+  .card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  .btn {
+    display: inline-block;
+    background-color: #ff9800;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #e68900;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #1f1f1f;
+    padding: 20px;
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  footer a {
+    color: #ff9800;
+    text-decoration: none;
+  }
+  
+  /* Bloques de Código */
+  pre {
+    background-color: #2d2d2d;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  
+  code {
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  /* Botón para copiar código */
+  .copy-btn {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 5px 10px;
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .copy-btn:hover {
+    background-color: #e68900;
+  }
+  
+  /* Botones de navegación en tutoriales */
+  .navigation-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .navigation-buttons .btn {
+    flex: 1;
+    text-align: center;
+  }
+  
+  /* Estilos Responsivos */
+  @media (max-width: 768px) {
+    .navbar-toggle {
+      display: block;
+    }
+    
+    .navbar-menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .navbar-menu.active {
+      display: flex;
+    }
+    
+    .navbar-links {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .navbar-links li {
+      margin: 10px 0;
+    }
+    
+    .tutorial-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
