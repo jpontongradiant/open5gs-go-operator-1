@@ -1,4 +1,7 @@
 title: "open5gs-go-operator-1"
 description: "Página de GitHub Pages para el repositorio open5gs-go-operator-1"
-theme: jekyll-theme-cayman
- 
+theme: jekyll-theme-slate
+baseurl: /open5gs-go-operator-1
+relative_links:
+  enabled:     true
+  collections: true
