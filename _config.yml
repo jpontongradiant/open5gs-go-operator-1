@@ -1,7 +1,7 @@
-theme: jekyll-theme-slate
-baseurl: /5g-charts
-title: Gradiant 5G Charts
-description: A curated collection of 5G/6G related Helm Charts
+theme: jekyll-theme-minimal
+baseurl: /open5gs-operator
+title: Open5GS Operator
+description: Open5GS Operator for Kubernetes
 relative_links:
   enabled:     true
   collections: true
