@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear un Despliegue de Open5GS - Open5GS Operator</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="../img/logo.svg" alt="Open5GS Logo">
+                <span>Open5GS Operator</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="deployment.html" class="active">Despliegue</a></li>
+                <li><a href="users.html">Usuarios</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="tutorial-header">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li><a href="../index.html">Inicio</a></li>
+                <li>Tutorial de Despliegue</li>
+            </ul>
+            <h1>Crear un Despliegue de Open5GS</h1>
+            <p>Aprende a desplegar Open5GS en Kubernetes usando el operador</p>
+        </div>
+    </section>
+
+    <section class="tutorial-content-section">
+        <div class="tutorial-container">
+            <h2>Introducción</h2>
+            <p>El Open5GS Operator facilita el despliegue y la gestión de instancias de Open5GS en un clúster de Kubernetes. Este tutorial te guiará a través del proceso de creación de un recurso personalizado <code>Open5GS</code> que automatiza el despliegue completo de todos los componentes necesarios.</p>
+
+            <h2>Requisitos previos</h2>
+            <ul>
+                <li>Un clúster de Kubernetes en funcionamiento</li>
+                <li>kubectl instalado y configurado para interactuar con tu clúster</li>
+                <li>El operador de Open5GS instalado en tu clúster</li>
+            </ul>
+
+            <h2>Crear un despliegue básico</h2>
+            <p>Para crear un despliegue básico de Open5GS, necesitas definir un recurso personalizado que describa la configuración deseada.</p>
+
+            <div class="code-block">
+                <pre><code class="language-yaml">apiVersion: open5gs.org/v1alpha1
+kind: Open5GS
+metadata:
+  name: open5gs-basic
+spec:
+  # Componentes del plano de control
+  amf:
+    replicas: 1
+  ausf:
+    replicas: 1
+  nrf:
+    replicas: 1
+  nssf:
+    replicas: 1
+  pcf:
+    replicas: 1
+  smf:
+    replicas: 1
+  udm:
+    replicas: 1
+  udr:
+    replicas: 1
+  
+  # Componentes del plano de usuario
+  upf:
+    replicas: 1
+  
+  # Configuración de red
+  networkSettings:
+    mcc: "001"        # Código de país móvil
+    mnc: "01"         # Código de red móvil
+    tac: 1            # Código de área de seguimiento
+    apnList:          # Lista de APN disponibles
+      - name: "internet"
+        ipv4Pool: "10.45.0.0/16"
+        dnsServers:
+          - "8.8.8.8"
+          - "8.8.4.4"</code></pre>
+            </div>
+
+            <h3>Aplicar la configuración</h3>
+            <p>Guarda el código YAML anterior en un archivo llamado <code>open5gs-deployment.yaml</code> y aplícalo a tu clúster:</p>
+            
+            <div class="code-block">
+                <pre><code class="language-bash">kubectl apply -f open5gs-deployment.yaml</code></pre>
+            </div>
+
+            <h2>Verificar el despliegue</h2>
+            <p>Una vez aplicado el recurso, el operador comenzará a crear los componentes necesarios. Puedes verificar el estado del despliegue con los siguientes comandos:</p>
+
+            <div class="code-block">
+                <pre><code class="language-bash"># Verificar el estado del recurso Open5GS
+kubectl get open5gs
+
+# Verificar los pods desplegados
+kubectl get pods
+
+# Verificar los servicios creados
+kubectl get services</code></pre>
+            </div>
+
+            <h2>Configuraciones avanzadas</h2>
+            <p>El operador de Open5GS permite configuraciones más avanzadas para adaptarse a diferentes escenarios y requisitos.</p>
+
+            <h3>Configuración de recursos</h3>
+            <p>Puedes especificar los recursos (CPU, memoria) para cada componente:</p>
+
+            <div class="code-block">
+                <pre><code class="language-yaml">apiVersion: open5gs.org/v1alpha1
+kind: Open5GS
+metadata:
+  name: open5gs-advanced
+spec:
+  amf:
+    replicas: 2
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "512Mi"
+      limits:
+        cpu: "1000m"
+        memory: "1Gi"
+  # Resto de componentes...
+</code></pre>
+            </div>
+
+            <h3>Configuración de persistencia</h3>
+            <p>Para componentes que requieren almacenamiento persistente:</p>
+
+            <div class="code-block">
+                <pre><code class="language-yaml">  udr:
+    replicas: 1
+    persistence:
+      enabled: true
+      storageClass: "standard"
+      size: "10Gi"</code></pre>
+            </div>
+
+            <h2>Eliminar un despliegue</h2>
+            <p>Para eliminar el despliegue de Open5GS y todos sus recursos asociados:</p>
+
+            <div class="code-block">
+                <pre><code class="language-bash">kubectl delete open5gs open5gs-basic</code></pre>
+            </div>
+
+            <div class="tutorial-nav">
+                <div class="nav-prev">
+                    <a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Inicio</a>
+                </div>
+                <div class="nav-next">
+                    <a href="users.html">Tutorial de Usuarios <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../img/logo.svg" alt="Open5GS Logo">
+                    <span>Open5GS Operator</span>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="deployment.html">Despliegue</a></li>
+                        <li><a href="users.html">Usuarios</a></li>
+                    </ul>
