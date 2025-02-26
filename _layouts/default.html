@@ -1,62 +1,57 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
-  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
-  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  
-  <!-- Syntax highlighting -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
-  
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
-</head>
-<body>
-  <header>
-    <nav class="navbar">
-      <div class="navbar-container">
-        <a href="{{ '/' | relative_url }}" class="navbar-brand">{{ site.title }}</a>
-        <button class="navbar-toggle" id="navbar-toggle">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-        <div class="navbar-menu" id="navbar-menu">
-          <ul class="navbar-links">
-            <li><a href="{{ '/' | relative_url }}">Inicio</a></li>
-            <li><a href="{{ '/tutorials' | relative_url }}">Tutoriales</a></li>
-            <li><a href="{{ '/about' | relative_url }}">Acerca de</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <main>
-    {{ content }}
-  </main>
-  <footer>
-    <div class="footer-content">
-      <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Todos los derechos reservados.</p>
-      <p>Contacto: <a href="mailto:info@open5gsoperator.com">info@open5gsoperator.com</a></p>
-      <p>GitHub: <a href="https://github.com/tuusuario" target="_blank" rel="noopener">tuusuario</a></p>
+<html lang="{{ site.lang | default: "en-US" }}">
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,maximum-scale=2">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+{% seo %}
+    {% include head-custom.html %}
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          {% if site.github.is_project_page %}
+            <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/Gradiant/5g-charts" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star Gradiant/5g-charts on GitHub">Star</a>
+          {% endif %}
+
+          <h1 id="project_title">{{ site.title | default: site.github.repository_name }}</h1>
+          <h2 id="project_tagline">{{ site.description | default: site.github.project_tagline }}</h2>
+
+          {% if site.show_downloads %}
+            <section id="downloads">
+              <a class="zip_download_link" href="{{ site.github.zip_url }}">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="{{ site.github.tar_url }}">Download this project as a tar.gz file</a>
+            </section>
+          {% endif %}
+          {% include nav.html %}
+        </header>
     </div>
-  </footer>
-  
-  <!-- JavaScript -->
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-  <script>
-    hljs.highlightAll();
-  </script>
-</body>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        {{ content }}
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        {% if site.github.is_project_page %}
+        <p class="copyright">{{ site.title | default: site.github.repository_name }} maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
+        {% endif %}
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+  </body>
 </html>
