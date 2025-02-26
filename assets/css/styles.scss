@@ -2,106 +2,75 @@
 ---
 
 @import "{{ site.theme }}";
-
-// Variables de configuración
-$navbar-bg: rgb(51, 183, 245);
-$navbar-hover: rgb(221, 209, 209);
-$dropdown-bg: #f9f9f9;
-$dropdown-hover: #ddd;
-$font-family: 'Arial', sans-serif;
-$font-size: 18px;
-$navbar-padding: 14px 16px;
-
-// Contenedor de la navbar
-.navbar {
-  overflow: hidden;
-  background-color: $navbar-bg;
-  font-family: $font-family;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-
-  a {
-    font-size: $font-size;
+ /* Navbar container */
+ .navbar {
+    overflow: hidden;
+    background-color: rgb(51, 183, 245);
+    font-family: Arial;
+    font-weight: bold;
+  }
+  
+  /* Links inside the navbar */
+  .navbar a {
+    float: left;
+    font-size: 18px;
     color: white;
     text-align: center;
-    padding: $navbar-padding;
+    padding: 14px 16px;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: $navbar-hover;
-    }
   }
-}
-
-// Contenedor del dropdown
-.dropdown {
-  position: relative;
-  display: inline-block;
-
-  .dropbtn {
-    font-size: $font-size;
+  
+  /* The dropdown container */
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  /* Dropdown button */
+  .dropdown .dropbtn {
+    font-size: 18px;
     font-weight: bold;
     border: none;
     outline: none;
     color: white;
-    padding: $navbar-padding;
-    background: inherit;
-    font-family: inherit; // Asegura la misma tipografía que la navbar
-    margin: 0;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: $navbar-hover;
-    }
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
   }
-
-  // Contenido del dropdown (oculto por defecto)
+  
+  /* Add a red background color to navbar links on hover */
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: rgb(221, 209, 209);
+  }
+  
+  /* Dropdown content (hidden by default) */
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: $dropdown-bg;
+    background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-
-    a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      text-align: left;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: $dropdown-hover;
-      }
-    }
   }
-
-  // Muestra el dropdown al hacer hover sobre el contenedor
-  &:hover .dropdown-content {
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
     display: block;
+    text-align: left;
   }
-}
-
-// Ajustes para dispositivos móviles
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-
-    a,
-    .dropbtn {
-      width: 100%;
-      text-align: left;
-    }
+  
+  /* Add a grey background color to dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
   }
-
-  .dropdown-content {
-    position: static;
-    box-shadow: none;
-  }
-}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  } 
