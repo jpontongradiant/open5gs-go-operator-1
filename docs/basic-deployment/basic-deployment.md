@@ -1,6 +1,6 @@
 # Create a Basic Open5GS Deployment
 
-1. Create a deployment configuration file for Open5GS. Here’s a basic example (the configuration missing will be set to default values):
+1. Create a deployment configuration file for Open5GS. Here’s a basic example (the missing configuration will be set to default values):
 
     ``` yaml
     apiVersion: net.gradiant.org/v1
@@ -16,7 +16,7 @@
     ```
     <a href="https://gradiant.github.io/open5gs-operator/docs/basic-deployment/open5gs-basic-deployment.yaml" class="download-button" download>Download open5gs-basic-deployment.yaml</a>
 
-    - The `slices` field is optional. If it is not provided in the configuration, default values will be used by the system.
+    - The `slices` field is optional. If it is not provided in the configuration, default values will be used by the operator.
 
 2. Apply the deployment file:
 

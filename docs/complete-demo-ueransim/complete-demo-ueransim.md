@@ -1,4 +1,4 @@
-# Demo
+# Complete Demo with UERANSIM
 
 In this demo it is shown how to deploy an Open5GS instance and create several users. Also, it is demonstrated how the changes in the network slices are managed by the operator and a connectivity test is performed to verify that the users are assigned to the correct slice.
 
@@ -18,7 +18,7 @@ Four users are registered, two for each slice:
 ```bash
 kubectl apply -f https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/open5gs-users.yaml
 ```
-UERANSIM is deployed with two GNBs, each with two users:
+UERANSIM is deployed with two GNBs, each one with two users:
 ```bash
 helm install ueransim-gnb-1 oci://registry-1.docker.io/gradiant/ueransim-gnb --version 0.2.6 --values https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/gnb-1-values.yaml
 
@@ -44,7 +44,9 @@ UERANSIM in undeployed:
 helm uninstall ueransim-gnb-1
 helm uninstall ueransim-gnb-2
 ```
-Now you must uncomment the second slice in the Open5GS CR `https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/open5gs-one-slice.yaml` and apply it. You can apply the uncommented file with the following command:
+Now you must uncomment the second slice in the Open5GS CR `https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/open5gs-one-slice.yaml` and apply it. 
+
+This will enable the new slice and the operator will apply the new configuration and restart the neccesary pods. You can apply the uncommented file with the following command:
 ```bash
 kubectl apply -f https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/open5gs-one-slice-uncommented.yaml
 ```

@@ -7,7 +7,7 @@ helm install open5gs-operator oci://registry-1.docker.io/gradiantcharts/open5gs-
 
 #### Uninstall with Helm
 
-Delete all the Open5GS and Open5GSUser resources and run:
+Delete all the Open5GSUser and Open5GS resources and run:
 
 ```bash
 helm uninstall open5gs-operator 
@@ -15,7 +15,7 @@ helm uninstall open5gs-operator
 
 ### Option 2: Installation without Helm
 
-If you prefer not to use Helm, you can apply the Kubernetes manifests directly or use the Makefile to install de CRD and deploy de operator.
+If you prefer not to use Helm, you can apply the Kubernetes manifests directly or use the Makefile to install de CRD and deploy the operator.
 
 ```bash
 make deploy IMG=gradiant/open5gs-operator:1.0.0
@@ -23,7 +23,7 @@ make deploy IMG=gradiant/open5gs-operator:1.0.0
 
 #### Uninstall without Helm
 
-Delete all the Open5GS and Open5GSUser resources and run:
+Delete all the Open5GSUser and Open5GS resources and run:
 
 ```bash
 make undeploy
