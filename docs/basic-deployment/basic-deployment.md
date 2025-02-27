@@ -1,4 +1,4 @@
-### Create an Open5GS Deployment
+# Create a Basic Open5GS Deployment
 
 1. Create a deployment configuration file for Open5GS. Here’s a basic example (the configuration missing will be set to default values):
 
@@ -14,12 +14,14 @@
               - sst: "1"
                 sd: "0x111111"
     ```
+    <a href="https://gradiant.github.io/open5gs-operator/docs/basic-deployment/open5gs-basic-deployment.yaml" class="download-button" download>Download open5gs-basic-deployment.yaml</a>
+
     - The `slices` field is optional. If it is not provided in the configuration, default values will be used by the system.
 
 2. Apply the deployment file:
 
    ``` bash
-   kubectl apply -f open5gs-deployment.yaml
+   kubectl apply -f open5gs-basic-deployment.yaml
    ```
 
 ### Create Open5GS Users
@@ -43,6 +45,7 @@
             name: "open5gs-sample"
             namespace: "default"
     ```
+    <a href="https://gradiant.github.io/open5gs-operator/docs/basic-deployment/open5gs-user.yaml" class="download-button" download>Download open5gs-user.yaml</a>
 
     - The `apn`, `sst`, and `sd` fields are optional. If they are not provided in the configuration, default values will be used by the system.
     - The `open5gs` field must contain the `name` and `namespace` of the Open5GS deployment to which the user will be assigned.
@@ -50,5 +53,5 @@
 2. Apply the user configuration:
 
    ``` bash
-   kubectl apply -f open5gsuser-1.yaml
+   kubectl apply -f open5gs-user.yaml
    ```
