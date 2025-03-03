@@ -99,10 +99,7 @@ kubectl apply -f open5gs-advanced-deployment.yaml
 - **`metrics` & `serviceMonitor`**: Enable Prometheus monitoring. Defaults: `metrics` enabled for AMF, PCF, SMF, and UPF; `serviceMonitor` disabled.
 - **`serviceType`**: Defines Kubernetes service exposure (`ClusterIP`, `NodePort`, `LoadBalancer`). Default: `ClusterIP`.
 - **`slices`**: Defines network slices (`sst` and `sd`) for user segmentation. If omitted, Open5GS uses a default slice.
-- **Managed vs. Unmanaged Users**:
-  - **Managed Users**: Defined in an `Open5GSUser` CRD. The operator ensures consistency between desired and actual configurations.
-  - **Unmanaged Users**: Users manually added via WebUI or external scripts. The operator does not modify them.
-- **Multi-Namespace Support**: The operator can manage Open5GS deployments across multiple namespaces.
+
 
 
 ## 2. Applying the Manifest with Modifications
@@ -181,28 +178,32 @@ kubectl apply -f open5gs-advanced-deployment-modified.yaml
 
 To observe the effects of the changes in the cluster:
 
-### 3.1 Watch pods restart after applying deployment changes
-bash
+- Watch pods restart after applying deployment changes
+```bash
 kubectl get pods -w
+```
 
+- Check service changes (exposing LoadBalancer and NodePort)
+```bash
+kubectl get services
+```
 
-### 3.2 Check service changes (exposing LoadBalancer and NodePort)
-bash
-kubectl get svc
-
-
-### 3.3 Verify that service accounts have been removed or modified
-bash
+- 3.3 Verify that service accounts have been removed or modified
+```bash
 kubectl get serviceaccounts
+```
 
-
-### 3.4 Check the applied ServiceMonitors
-bash
+- Check the applied ServiceMonitors
+```bash
 kubectl get servicemonitors
+```
 
 ---
 
 ## 4. Managing Open5GS Users
+- **Managed vs. Unmanaged Users**:
+  - **Managed Users**: Defined in an `Open5GSUser` CRD. The operator ensures consistency between desired and actual configurations.
+  - **Unmanaged Users**: Users manually added via WebUI or external scripts. The operator does not modify them.
 
 ### 4.1 Understanding User Fields
 
