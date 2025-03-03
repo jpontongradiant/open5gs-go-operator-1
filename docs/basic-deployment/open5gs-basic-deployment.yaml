@@ -1,4 +1,4 @@
-apiVersion: net.gradient.org/v1
+apiVersion: net.gradiant.org/v1
 kind: Open5GS
 metadata:
   name: open5gs-sample

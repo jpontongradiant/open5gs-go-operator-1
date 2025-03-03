@@ -257,4 +257,5 @@ kubectl apply -f open5gs-user.yaml
 ## 5 Checking Operator Logs
 To verify the operator's actions, check the logs for any errors or warnings:
 ```bash
-
+kubectl logs deployments/open5gs-operator-controller-manager 
+```
