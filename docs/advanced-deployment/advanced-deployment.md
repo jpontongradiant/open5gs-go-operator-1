@@ -1,0 +1,245 @@
+# Advanced Deployment of Open5GS on Kubernetes
+
+This tutorial provides an in-depth guide on configuring the `Open5GS` Custom Resource Definition (CRD) used by the Kubernetes operator to deploy and manage Open5GS. It covers configurable fields, default values, and customization options tailored to specific requirements. Additionally, it includes an example of modifying the manifest and analyzing its impact on the deployment. ServiceMonitors are is used in this tutorial so if the ServiceMonitor CRD is not installed in your cluster, you can ignore the references to them.
+
+
+---
+
+## 1. Complete Open5GS CRD Manifest
+
+The following manifest defines a comprehensive instance of Open5GS, incorporating all components and default configurations:
+
+```yaml
+apiVersion: net.gradiant.org/v1
+kind: Open5GS
+metadata:
+  labels:
+    app.kubernetes.io/name: open5gs-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: open5gs-sample
+  namespace: default
+spec:
+  open5gsImage: "docker.io/gradiant/open5gs:2.7.2"
+  webuiImage: "docker.io/gradiant/open5gs-webui:2.7.2"
+  mongoDBVersion: "5.0.10-debian-11-r3"
+  amf:
+    enabled: true
+    serviceAccount: true
+    metrics: true
+    serviceMonitor: true
+    service:
+      - name: ngap
+        serviceType: ClusterIP
+  ausf:
+    enabled: true
+    serviceAccount: true
+  bsf:
+    enabled: true
+    serviceAccount: true
+  mongoDB:
+    enabled: true
+    serviceAccount: true
+  nrf:
+    enabled: true
+    serviceAccount: true
+  nssf:
+    enabled: true
+    serviceAccount: true
+  pcf:
+    enabled: true
+    metrics: true
+    serviceMonitor: true
+    serviceAccount: true
+  smf:
+    enabled: true
+    metrics: true
+    serviceMonitor: true
+    serviceAccount: true
+    service:
+      - name: pfcp
+        serviceType: ClusterIP
+  upf:
+    enabled: true
+    metrics: true
+    serviceMonitor: true
+    serviceAccount: true
+    service:
+      - name: pfcp
+        serviceType: ClusterIP
+      - name: gtpu
+        serviceType: ClusterIP
+  webui:
+    enabled: true
+    serviceAccount: true
+  configuration:
+    mcc: "999"
+    mnc: "70"
+    tac: "0001"
+    region: "2"
+    set: "1"
+    slices:
+      - sst: "1"
+        sd: "0x111111"
+      - sst: "2"
+        sd: "0x222222"
+```
+
+### 1.1 Explanation of Configurable Fields
+
+- **`open5gsImage` & `webuiImage`**: Define the Open5GS and WebUI image versions. Defaults to `docker.io/gradiant/open5gs:2.7.2`.
+- **`mongoDBVersion`**: Specifies the MongoDB version used. Default is `5.0.10-debian-11-r3`.
+- **`enabled`**: Activates or deactivates an Open5GS component. Essential components are enabled by default.
+- **`serviceAccount`**: Determines whether a component has a dedicated Kubernetes Service Account.
+- **`metrics` & `serviceMonitor`**: Enable Prometheus monitoring. Defaults: `metrics` enabled for AMF, PCF, SMF, and UPF; `serviceMonitor` disabled.
+- **`serviceType`**: Defines Kubernetes service exposure (`ClusterIP`, `NodePort`, `LoadBalancer`). Default: `ClusterIP`.
+- **`slices`**: Defines network slices (`sst` and `sd`) for user segmentation. If omitted, Open5GS uses a default slice.
+- **Managed vs. Unmanaged Users**:
+  - **Managed Users**: Defined in an `Open5GSUser` CRD. The operator ensures consistency between desired and actual configurations.
+  - **Unmanaged Users**: Users manually added via WebUI or external scripts. The operator does not modify them.
+- **Multi-Namespace Support**: The operator can manage Open5GS deployments across multiple namespaces.
+
+
+## 2. Applying the Manifest with Modifications
+
+We will modify some fields to observe their impact on the deployment:
+
+```yaml
+apiVersion: net.gradiant.org/v1
+kind: Open5GS
+metadata:
+  labels:
+    app.kubernetes.io/name: open5gs-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: open5gs-sample
+  namespace: default
+spec:
+  open5gsImage: "docker.io/gradiant/open5gs:2.7.0"
+  webuiImage: "docker.io/gradiant/open5gs-webui:2.7.0"
+  mongoDBVersion: "5.0.10-debian-11-r3"
+  amf:
+    enabled: true
+    serviceAccount: true
+    metrics: true
+    serviceMonitor: false
+    service:
+      - name: ngap
+        serviceType: ClusterIP
+  smf:
+    enabled: true
+    metrics: false
+    serviceMonitor: true
+    serviceAccount: true
+    service:
+      - name: pfcp
+        serviceType: LoadBalancer
+  upf:
+    enabled: true
+    metrics: true
+    serviceMonitor: true
+    serviceAccount: true
+    service:
+      - name: pfcp
+        serviceType: NodePort
+      - name: gtpu
+        serviceType: ClusterIP
+  webui:
+    enabled: false
+  configuration:
+    mcc: "999"
+    mnc: "70"
+    tac: "0001"
+    slices:
+      - sst: "1"
+        sd: "0x111111"
+      - sst: "2"
+        sd: "0x222222"
+```
+
+### 2.1 Changes Made
+
+- **Updated Open5GS and WebUI versions** to 2.7.0.
+- **Disabled ServiceMonitor for AMF**.
+- **Disabled metrics for SMF**.
+- **Changed SMF service type to LoadBalancer**.
+- **Exposed pfcp in UPF as NodePort**.
+- **Disabled WebUI**.
+
+## 3. Verifying Changes
+
+To observe the effects of the changes in the cluster:
+
+### 3.1 Watch pods restart after applying deployment changes
+bash
+kubectl get pods -w
+
+
+### 3.2 Check service changes (exposing LoadBalancer and NodePort)
+bash
+kubectl get svc
+
+
+### 3.3 Verify that service accounts have been removed or modified
+bash
+kubectl get serviceaccounts
+
+
+### 3.4 Check the applied ServiceMonitors
+bash
+kubectl get servicemonitors
+
+---
+
+## 4. Managing Open5GS Users
+
+### 4.1 Understanding User Fields
+
+- **`imsi`**: International Mobile Subscriber Identity, a unique identifier for the user.
+- **`key`**: Authentication key used in the AKA (Authentication and Key Agreement) process.
+- **`opc`**: Operator key for authentication.
+- **`sd`**: Slice Differentiator, used in network slicing.
+- **`sst`**: Slice Service Type, defining the service category.
+- **`apn`**: Access Point Name, specifies the network to which the UE connects.
+- **`open5gs`**: Specifies the Open5GS instance the user belongs to. Name is needed but namespace is optional (defaults to actual namespace).
+
+### 4.2 Adding a New User
+Create a new `Open5GSUser` CRD with the following manifest:
+```yaml
+apiVersion: net.gradiant.org/v1
+kind: Open5GSUser
+metadata:
+  name: open5gsuser-sample
+spec:
+  imsi: "999700000000001"
+  key: "465B5CE8B199B49FAA5F0A2EE238A6BC"
+  opc: "E8ED289DEBA952E4283B54E88E6183CA"
+  sd: "111111"
+  sst: "1"
+  apn: "internet"
+  open5gs:
+    name: "open5gs-sample"
+    namespace: "default"
+```
+Apply the manifest:
+```bash
+kubectl apply -f open5gsuser.yaml
+```
+
+### 4.3 Modifying an Existing User
+To update user values, modify the `sd`, `sst`, or `apn` fields in the CRD:
+```yaml
+spec:
+  sd: "222222"
+  sst: "2"
+  apn: "enterprise"
+```
+Apply the changes:
+```bash
+kubectl apply -f open5gsuser.yaml
+```
+
+---
+
+## 5 Checking Operator Logs
+To verify the operator's actions, check the logs for any errors or warnings:
+```bash
+
