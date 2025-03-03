@@ -14,7 +14,7 @@
               - sst: "1"
                 sd: "0x111111"
     ```
-    <a href="https://gradiant.github.io/open5gs-operator/docs/basic-deployment/open5gs-basic-deployment.yaml" class="download-button" download>Download open5gs-basic-deployment.yaml</a>
+    <a href="https://jpontongradiant.github.io/open5gs-go-operator-1/docs/basic-deployment/open5gs-basic-deployment.yaml" class="download-button" download>Download open5gs-basic-deployment.yaml</a>
 
     - The `slices` field is optional. If it is not provided in the configuration, default values will be used by the operator.
 
@@ -45,7 +45,7 @@
             name: "open5gs-sample"
             namespace: "default"
     ```
-    <a href="https://gradiant.github.io/open5gs-operator/docs/basic-deployment/open5gs-user.yaml" class="download-button" download>Download open5gs-user.yaml</a>
+    <a href="https://jpontongradiant.github.io/open5gs-go-operator-1/docs/basic-deployment/open5gs-user.yaml" class="download-button" download>Download open5gs-user.yaml</a>
 
     - The `apn`, `sst`, and `sd` fields are optional. If they are not provided in the configuration, default values will be used by the system.
     - The `open5gs` field must contain the `name` and `namespace` of the Open5GS deployment to which the user will be assigned.

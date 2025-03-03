@@ -83,7 +83,7 @@ spec:
       - sst: "2"
         sd: "0x222222"
 ```
-<a href="https://gradiant.github.io/open5gs-operator/docs/advanced-deployment/open5gs-advanced-deployment.yaml" class="download-button" download>Download open5gs-advanced-deployment.yaml</a>
+<a href="https://jpontongradiant.github.io/open5gs-go-operator-1/docs/advanced-deployment/open5gs-advanced-deployment.yaml" class="download-button" download>Download open5gs-advanced-deployment.yaml</a>
 
 Apply the manifest to the cluster:
 ```bash
@@ -157,7 +157,7 @@ spec:
       - sst: "2"
         sd: "0x222222"
 ```
-<a href="https://gradiant.github.io/open5gs-operator/docs/advanced-deployment/open5gs-advanced-deployment-modified.yaml" class="download-button" download>Download open5gs-advanced-deployment-modified.yaml</a>
+<a href="https://jpontongradiant.github.io/open5gs-go-operator-1/docs/advanced-deployment/open5gs-advanced-deployment-modified.yaml" class="download-button" download>Download open5gs-advanced-deployment-modified.yaml</a>
 
 Apply the manifest to the cluster:
 ```bash
@@ -233,7 +233,7 @@ spec:
     name: "open5gs-sample"
     namespace: "default"
 ```
-<a href="https://gradiant.github.io/open5gs-operator/docs/advanced-deployment/open5gs-user.yaml" class="download-button" download>Download open5gs-user.yaml</a>
+<a href="https://jpontongradiant.github.io/open5gs-go-operator-1/docs/advanced-deployment/open5gs-user.yaml" class="download-button" download>Download open5gs-user.yaml</a>
 Apply the manifest:
 ```bash
 kubectl apply -f open5gs-user.yaml

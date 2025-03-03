@@ -12,17 +12,17 @@ kubectl logs deployment/open5gs-operator-controller-manager -n open5gs-operator-
 ```
 We create an instance of Open5GS with a configured slice:
 ```bash
-kubectl apply -f https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/open5gs-one-slice.yaml
+kubectl apply -f https://jpontongradiant.github.io/open5gs-go-operator-1/docs/complete-demo-ueransim/open5gs-one-slice.yaml
 ```
 Four users are registered, two for each slice:
 ```bash
-kubectl apply -f https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/open5gs-users.yaml
+kubectl apply -f https://jpontongradiant.github.io/open5gs-go-operator-1/docs/complete-demo-ueransim/open5gs-users.yaml
 ```
 UERANSIM is deployed with two GNBs, each one with two users:
 ```bash
-helm install ueransim-gnb-1 oci://registry-1.docker.io/gradiant/ueransim-gnb --version 0.2.6 --values https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/gnb-1-values.yaml
+helm install ueransim-gnb-1 oci://registry-1.docker.io/gradiant/ueransim-gnb --version 0.2.6 --values https://jpontongradiant.github.io/open5gs-go-operator-1/docs/complete-demo-ueransim/gnb-1-values.yaml
 
-helm install ueransim-gnb-2 oci://registry-1.docker.io/gradiant/ueransim-gnb --version 0.2.6 --values https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/gnb-2-values.yaml
+helm install ueransim-gnb-2 oci://registry-1.docker.io/gradiant/ueransim-gnb --version 0.2.6 --values https://jpontongradiant.github.io/open5gs-go-operator-1/docs/complete-demo-ueransim/gnb-2-values.yaml
 ```
 
 It is observed that only the users of the first slice are connected. This is because we only enabled the first slice in the Open5GS instance:
@@ -44,17 +44,17 @@ UERANSIM in undeployed:
 helm uninstall ueransim-gnb-1
 helm uninstall ueransim-gnb-2
 ```
-Now you must uncomment the second slice in the Open5GS CR `https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/open5gs-one-slice.yaml` and apply it. 
+Now you must uncomment the second slice in the Open5GS CR `https://jpontongradiant.github.io/open5gs-go-operator-1/docs/complete-demo-ueransim/open5gs-one-slice.yaml` and apply it. 
 
 This will enable the new slice and the operator will apply the new configuration and restart the neccesary pods. You can apply the uncommented file with the following command:
 ```bash
-kubectl apply -f https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/open5gs-one-slice-uncommented.yaml
+kubectl apply -f https://jpontongradiant.github.io/open5gs-go-operator-1/docs/complete-demo-ueransim/open5gs-one-slice-uncommented.yaml
 ```
 Wait until AMF and NSSF are `Running` again and deploy UERANSIM:
 ```bash
-helm install ueransim-gnb-1 oci://registry-1.docker.io/gradiant/ueransim-gnb --version 0.2.6 --values https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/gnb-1-values.yaml
+helm install ueransim-gnb-1 oci://registry-1.docker.io/gradiant/ueransim-gnb --version 0.2.6 --values https://jpontongradiant.github.io/open5gs-go-operator-1/docs/complete-demo-ueransim/gnb-1-values.yaml
 
-helm install ueransim-gnb-2 oci://registry-1.docker.io/gradiant/ueransim-gnb --version 0.2.6 --values https://gradiant.github.io/open5gs-operator/docs/complete-demo-ueransim/gnb-2-values.yaml
+helm install ueransim-gnb-2 oci://registry-1.docker.io/gradiant/ueransim-gnb --version 0.2.6 --values https://jpontongradiant.github.io/open5gs-go-operator-1/docs/complete-demo-ueransim/gnb-2-values.yaml
 ```
 We observe that the users of both slices are connected:
 ```bash
