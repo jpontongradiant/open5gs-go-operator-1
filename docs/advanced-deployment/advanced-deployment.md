@@ -127,6 +127,26 @@ spec:
     service:
       - name: ngap
         serviceType: ClusterIP
+  ausf:
+    enabled: true
+    serviceAccount: true
+  bsf:
+    enabled: true
+    serviceAccount: true
+  mongoDB:
+    enabled: true
+    serviceAccount: true
+  nrf:
+    enabled: true
+    serviceAccount: true
+  nssf:
+    enabled: true
+    serviceAccount: true
+  pcf:
+    enabled: true
+    metrics: true
+    serviceMonitor: true
+    serviceAccount: true
   smf:
     enabled: true
     metrics: false
@@ -173,6 +193,7 @@ kubectl apply -f open5gs-advanced-deployment-modified.yaml
 - **Changed SMF service type to LoadBalancer**.
 - **Exposed pfcp in UPF as NodePort**.
 - **Disabled WebUI**.
+- **Ommited `region` and `set` fields** in the configuration (set to default values).
 
 ## 3. Verifying Changes
 
@@ -183,7 +204,7 @@ To observe the effects of the changes in the cluster:
 kubectl get pods -w
 ```
 
-- Check service changes (exposing LoadBalancer and NodePort)
+- Check service type changes (exposing LoadBalancer and NodePort) and disabled metric services
 ```bash
 kubectl get services
 ```

@@ -18,6 +18,26 @@ spec:
     service:
       - name: ngap
         serviceType: ClusterIP
+  ausf:
+    enabled: true
+    serviceAccount: true
+  bsf:
+    enabled: true
+    serviceAccount: true
+  mongoDB:
+    enabled: true
+    serviceAccount: true
+  nrf:
+    enabled: true
+    serviceAccount: true
+  nssf:
+    enabled: true
+    serviceAccount: true
+  pcf:
+    enabled: true
+    metrics: true
+    serviceMonitor: true
+    serviceAccount: true
   smf:
     enabled: true
     metrics: false
