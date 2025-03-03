@@ -5,7 +5,6 @@ metadata:
     app.kubernetes.io/name: open5gs-operator
     app.kubernetes.io/managed-by: kustomize
   name: open5gs-sample
-  namespace: default
 spec:
   open5gsImage: "docker.io/gradiant/open5gs:2.7.2"
   webuiImage: "docker.io/gradiant/open5gs-webui:2.7.2"

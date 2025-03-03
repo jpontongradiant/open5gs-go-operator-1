@@ -11,4 +11,3 @@ spec:
   apn: "internet"
   open5gs:
     name: "open5gs-sample"
-    namespace: "default"

@@ -17,7 +17,6 @@ metadata:
     app.kubernetes.io/name: open5gs-operator
     app.kubernetes.io/managed-by: kustomize
   name: open5gs-sample
-  namespace: default
 spec:
   open5gsImage: "docker.io/gradiant/open5gs:2.7.2"
   webuiImage: "docker.io/gradiant/open5gs-webui:2.7.2"
@@ -114,7 +113,6 @@ metadata:
     app.kubernetes.io/name: open5gs-operator
     app.kubernetes.io/managed-by: kustomize
   name: open5gs-sample
-  namespace: default
 spec:
   open5gsImage: "docker.io/gradiant/open5gs:2.7.0"
   webuiImage: "docker.io/gradiant/open5gs-webui:2.7.0"
@@ -253,7 +251,6 @@ spec:
   apn: "internet"
   open5gs:
     name: "open5gs-sample"
-    namespace: "default"
 ```
 <a href="https://jpontongradiant.github.io/open5gs-go-operator-1/docs/advanced-deployment/open5gs-user.yaml" class="download-button" download>Download open5gs-user.yaml</a>
 
@@ -270,6 +267,24 @@ spec:
   sst: "2"
   apn: "enterprise"
 ```
+
+The new manifest should look like this:
+```yaml
+apiVersion: net.gradiant.org/v1
+kind: Open5GSUser
+metadata:
+  name: open5gsuser-sample
+spec:
+  imsi: "999700000000001"
+  key: "465B5CE8B199B49FAA5F0A2EE238A6BC"
+  opc: "E8ED289DEBA952E4283B54E88E6183CA"
+  sd: "222222"
+  sst: "2"
+  apn: "enterprise"
+  open5gs:
+    name: "open5gs-sample"
+```
+
 Apply the changes:
 ```bash
 kubectl apply -f open5gs-user.yaml
