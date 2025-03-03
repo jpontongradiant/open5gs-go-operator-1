@@ -3,16 +3,16 @@
 1. Create a deployment configuration file for Open5GS. Here’s a basic example (the missing configuration will be set to default values):
 
     ``` yaml
-    apiVersion: net.gradiant.org/v1
-    kind: Open5GS
-    metadata:
-        name: open5gs-sample
-        namespace: default
-    spec:
-        configuration:
-            slices:
-              - sst: "1"
-                sd: "0x111111"
+apiVersion: net.gradiant.org/v1
+kind: Open5GS
+metadata:
+    name: open5gs-sample
+    namespace: default
+spec:
+    configuration:
+        slices:
+            - sst: "1"
+            sd: "0x111111"
     ```
     <a href="https://jpontongradiant.github.io/open5gs-go-operator-1/docs/basic-deployment/open5gs-basic-deployment.yaml" class="download-button" download>Download open5gs-basic-deployment.yaml</a>
 
@@ -29,21 +29,21 @@
 1. Create a configuration file for the users you want to add. Here’s an example:
 
     ```yaml
-    apiVersion: net.gradiant.org/v1
-    kind: Open5GSUser
-    metadata:
-        name: open5gsuser-sample
-        namespace: default
-    spec:
-        imsi: "999700000000001"
-        key: "465B5CE8B199B49FAA5F0A2EE238A6BC"
-        opc: "E8ED289DEBA952E4283B54E88E6183CA"
-        sd: "111111"
-        sst: "1"
-        apn: "internet"
-        open5gs:
-            name: "open5gs-sample"
-            namespace: "default"
+apiVersion: net.gradiant.org/v1
+kind: Open5GSUser
+metadata:
+    name: open5gsuser-sample
+    namespace: default
+spec:
+    imsi: "999700000000001"
+    key: "465B5CE8B199B49FAA5F0A2EE238A6BC"
+    opc: "E8ED289DEBA952E4283B54E88E6183CA"
+    sd: "111111"
+    sst: "1"
+    apn: "internet"
+    open5gs:
+        name: "open5gs-sample"
+        namespace: "default"
     ```
     <a href="https://jpontongradiant.github.io/open5gs-go-operator-1/docs/basic-deployment/open5gs-user.yaml" class="download-button" download>Download open5gs-user.yaml</a>
 
