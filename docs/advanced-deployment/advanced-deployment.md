@@ -83,6 +83,12 @@ spec:
       - sst: "2"
         sd: "0x222222"
 ```
+<a href="https://gradiant.github.io/open5gs-operator/docs/advanced-deployment/open5gs-advanced-deployment.yaml" class="download-button" download>Download open5gs-advanced-deployment.yaml</a>
+
+Apply the manifest to the cluster:
+```bash
+kubectl apply -f open5gs-advanced-deployment.yaml
+```
 
 ### 1.1 Explanation of Configurable Fields
 
@@ -154,6 +160,13 @@ spec:
       - sst: "2"
         sd: "0x222222"
 ```
+<a href="https://gradiant.github.io/open5gs-operator/docs/advanced-deployment/open5gs-advanced-deployment-modified.yaml" class="download-button" download>Download open5gs-advanced-deployment-modified.yaml</a>
+
+Apply the manifest to the cluster:
+```bash
+kubectl apply -f open5gs-advanced-deployment-modified.yaml
+```
+
 
 ### 2.1 Changes Made
 
@@ -219,9 +232,10 @@ spec:
     name: "open5gs-sample"
     namespace: "default"
 ```
+<a href="https://gradiant.github.io/open5gs-operator/docs/advanced-deployment/open5gs-user.yaml" class="download-button" download>Download open5gs-user.yaml</a>
 Apply the manifest:
 ```bash
-kubectl apply -f open5gsuser.yaml
+kubectl apply -f open5gs-user.yaml
 ```
 
 ### 4.3 Modifying an Existing User
@@ -234,7 +248,7 @@ spec:
 ```
 Apply the changes:
 ```bash
-kubectl apply -f open5gsuser.yaml
+kubectl apply -f open5gs-user.yaml
 ```
 
 ---
