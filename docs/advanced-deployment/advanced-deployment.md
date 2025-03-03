@@ -256,6 +256,7 @@ spec:
     namespace: "default"
 ```
 <a href="https://jpontongradiant.github.io/open5gs-go-operator-1/docs/advanced-deployment/open5gs-user.yaml" class="download-button" download>Download open5gs-user.yaml</a>
+
 Apply the manifest:
 ```bash
 kubectl apply -f open5gs-user.yaml
