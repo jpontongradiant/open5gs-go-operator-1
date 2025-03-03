@@ -188,6 +188,7 @@ kubectl apply -f open5gs-advanced-deployment-modified.yaml
 ### 2.1 Changes Made
 
 - **Updated Open5GS and WebUI versions** to 2.7.0.
+- **Disabled ServiceAccount for AUSF**.
 - **Disabled ServiceMonitor for AMF**.
 - **Disabled metrics for SMF**.
 - **Changed SMF service type to LoadBalancer**.

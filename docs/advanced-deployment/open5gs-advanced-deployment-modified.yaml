@@ -20,7 +20,7 @@ spec:
         serviceType: ClusterIP
   ausf:
     enabled: true
-    serviceAccount: true
+    serviceAccount: false
   bsf:
     enabled: true
     serviceAccount: true
