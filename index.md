@@ -26,6 +26,8 @@ The operator provides full management of Open5GS subscribers, including configur
   A guide about the different installation methods available, including using Helm and direct Kubernetes manifests.
 - [Basic Open5GS Deployment](docs/basic-deployment/basic-deployment.md)  
   A guide to setting up a basic deployment of Open5GS using the operator.
+- [Advanced Open5GS Deployment](docs/advanced-deployment/advanced-deployment.md)  
+  A guide to setting up an advanced deployment of Open5GS using the operator, including more advanced configuration options.
 - [Complete Demo with UERANSIM](docs/complete-demo-ueransim/complete-demo-ueransim.md)  
   A comprehensive demonstration of deploying the operator with a UERANSIM setup for testing connectivity.
 
